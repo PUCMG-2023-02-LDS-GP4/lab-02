@@ -1,4 +1,4 @@
-# Projeto 1 - Sistema de Matrículas	 
+# Projeto 2 - Aluguel de veículos	 
   
 ## Alunos integrantes da equipe
 
