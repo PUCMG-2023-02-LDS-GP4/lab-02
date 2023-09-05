@@ -1,5 +1,5 @@
-| Usuário            | Requisito                                                      | Motivação                                                      |
-| ------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| Usuário            | Requisito                                                      | Motivação                                                      | Status
+| -------------------  -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
 | Como usuário individual (cliente) | Desejo me cadastrar no sistema para poder utilizar os serviços de aluguel de veículos. | Poder utilizar os serviços de aluguel de veículos após o cadastro prévio. |
 | Como usuário individual (cliente) | Desejo introduzir um pedido de aluguel de um veículo no sistema. | Realizar pedidos de aluguel de veículos. |
 | Como usuário individual (cliente) | Desejo modificar um pedido de aluguel existente no sistema. | Poder atualizar pedidos de aluguel. |
