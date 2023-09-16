@@ -8,7 +8,3 @@
 | Como agente (empresa ou banco) | Desejo modificar um pedido de aluguel existente no sistema para avaliação financeira. | Poder ajustar pedidos para análise financeira. | Pendente |
 | Como agente (empresa ou banco) | Desejo avaliar financeiramente um pedido de aluguel. | Realizar análise financeira de pedidos de aluguel. | Pendente |
 | Como agente (empresa ou banco) | Desejo executar um contrato de aluguel após aprovação financeira. | Organizar contratos de aluguel aprovados. | Pendente |
-| Sistema             | Deve armazenar os dados de identificação e financeiros dos contratantes de aluguel. | Manter registros de contratantes. | Pendente |
-| Sistema             | Deve registrar os detalhes dos automóveis disponíveis para aluguel (matrícula, ano, marca, modelo e placa). | Manter informações sobre veículos. | Pendente |
-| Sistema             | Deve permitir a associação de um contrato de aluguel a um contrato de crédito concedido por um banco agente. | Vincular contratos de aluguel a contratos de crédito. | Pendente |
-| Sistema             | Deve ser subdividido em dois subsistemas: um para gestão de pedidos e contratos; e outro para a construção dinâmica das páginas web. | Manter a organização de pedidos e contratos e gerar páginas web dinamicamente com informações relevantes. | Pendente |
