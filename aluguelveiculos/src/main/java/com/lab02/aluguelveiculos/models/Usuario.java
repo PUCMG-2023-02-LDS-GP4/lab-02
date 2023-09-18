@@ -136,4 +136,19 @@ public class Usuario {
             "}";
     }
 
+    public void cadastrarUsuario(String username, String email, String telefone, String senha) {
+
+    }
+
+    public String consultarPedido(int idPedido) {
+
+    }
+
+    public String modificarPedido(int idPedido) {
+
+    }
+
+    public void cancelarPedido(int idPedido) {
+
+    }
 }
