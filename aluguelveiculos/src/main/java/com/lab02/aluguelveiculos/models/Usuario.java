@@ -1,12 +1,12 @@
 package com.lab02.aluguelveiculos.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToMany;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -34,21 +34,21 @@ public class Usuario {
     @Column(nullable = false)
     private String senha;
 
-    @OneToMany 
-    private List<Pedidos> pedidosCliente = new ArrayList<>();
+/*     @OneToMany 
+    private List<Pedidos> pedidosCliente = new ArrayList<>(); */
 
 
     public Usuario() {
     }
 
-    public Usuario(int id, String username, String email, String telefone, String endereco, String senha, List<Pedidos> pedidosCliente) {
+    public Usuario(int id, String username, String email, String telefone, String endereco, String senha) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.telefone = telefone;
         this.endereco = endereco;
         this.senha = senha;
-        this.pedidosCliente = pedidosCliente;
+/*         this.pedidosCliente = pedidosCliente; */
     }
 
     public int getId() {
@@ -99,13 +99,13 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public List<Pedidos> getPedidosCliente() {
+/*     public List<Pedidos> getPedidosCliente() {
         return this.pedidosCliente;
     }
 
     public void setPedidosCliente(List<Pedidos> pedidosCliente) {
         this.pedidosCliente = pedidosCliente;
-    }
+    } */
 
     @Override
     public boolean equals(Object o) {
@@ -115,12 +115,12 @@ public class Usuario {
             return false;
         }
         Usuario usuario = (Usuario) o;
-        return id == usuario.id && Objects.equals(username, usuario.username) && Objects.equals(email, usuario.email) && Objects.equals(telefone, usuario.telefone) && Objects.equals(endereco, usuario.endereco) && Objects.equals(senha, usuario.senha) && Objects.equals(pedidosCliente, usuario.pedidosCliente);
+        return id == usuario.id && Objects.equals(username, usuario.username) && Objects.equals(email, usuario.email) && Objects.equals(telefone, usuario.telefone) && Objects.equals(endereco, usuario.endereco) && Objects.equals(senha, usuario.senha);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, email, telefone, endereco, senha, pedidosCliente);
+        return Objects.hash(id, username, email, telefone, endereco, senha);
     }
 
     @Override
@@ -132,21 +132,20 @@ public class Usuario {
             ", telefone='" + getTelefone() + "'" +
             ", endereco='" + getEndereco() + "'" +
             ", senha='" + getSenha() + "'" +
-            ", pedidosCliente='" + getPedidosCliente() + "'" +
             "}";
     }
 
     public void cadastrarUsuario(String username, String email, String telefone, String senha) {
 
     }
-
+/* 
     public String consultarPedido(int idPedido) {
 
     }
 
     public String modificarPedido(int idPedido) {
 
-    }
+    } */
 
     public void cancelarPedido(int idPedido) {
 

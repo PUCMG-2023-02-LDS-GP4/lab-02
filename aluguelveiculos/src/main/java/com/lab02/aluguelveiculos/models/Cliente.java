@@ -1,12 +1,12 @@
 package com.lab02.aluguelveiculos.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToMany;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,9 +14,10 @@ import java.util.Objects;
 @Entity
 @Table(name = "clientes")
 public class Cliente extends Usuario{
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column
     private String RG;
@@ -36,14 +37,14 @@ public class Cliente extends Usuario{
     @Column
     private String empresaEmpregadora;
 
-    @OneToMany // Supondo que cada rendimento é uma entidade separada.
-    private List<Float> rendimentos = new ArrayList<>();
+/*     @OneToMany // Supondo que cada rendimento é uma entidade separada.
+    private List<Float> rendimentos = new ArrayList<>(); */
 
 
     public Cliente() {
     }
 
-    public Cliente(Long id, String RG, int CPF, String nome, String endereco, String profissao, String empresaEmpregadora, List<Float> rendimentos) {
+    public Cliente(int id, String RG, int CPF, String nome, String endereco, String profissao, String empresaEmpregadora) {
         this.id = id;
         this.RG = RG;
         this.CPF = CPF;
@@ -51,14 +52,16 @@ public class Cliente extends Usuario{
         this.endereco = endereco;
         this.profissao = profissao;
         this.empresaEmpregadora = empresaEmpregadora;
-        this.rendimentos = rendimentos;
+/*         this.rendimentos = rendimentos; */
     }
 
-    public Long getId() {
+    @Override
+    public int getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -110,7 +113,7 @@ public class Cliente extends Usuario{
         this.empresaEmpregadora = empresaEmpregadora;
     }
 
-    public List<Float> getRendimentos() {
+/*     public List<Float> getRendimentos() {
         return this.rendimentos;
     }
 
@@ -118,7 +121,7 @@ public class Cliente extends Usuario{
         this.rendimentos = rendimentos;
     }
 
-
+ */
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -127,12 +130,12 @@ public class Cliente extends Usuario{
             return false;
         }
         Cliente cliente = (Cliente) o;
-        return Objects.equals(id, cliente.id) && CPF == cliente.CPF && Objects.equals(nome, cliente.nome) && Objects.equals(endereco, cliente.endereco) && Objects.equals(profissao, cliente.profissao) && Objects.equals(empresaEmpregadora, cliente.empresaEmpregadora) && Objects.equals(rendimentos, cliente.rendimentos);
+        return Objects.equals(id, cliente.id) && CPF == cliente.CPF && Objects.equals(nome, cliente.nome) && Objects.equals(endereco, cliente.endereco) && Objects.equals(profissao, cliente.profissao) && Objects.equals(empresaEmpregadora, cliente.empresaEmpregadora);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, CPF, nome, endereco, profissao, empresaEmpregadora, rendimentos);
+        return Objects.hash(id, CPF, nome, endereco, profissao, empresaEmpregadora);
     }
 
     @Override
@@ -144,7 +147,6 @@ public class Cliente extends Usuario{
             ", endereco='" + getEndereco() + "'" +
             ", profissao='" + getProfissao() + "'" +
             ", empresaEmpregadora='" + getEmpresaEmpregadora() + "'" +
-            ", rendimentos='" + getRendimentos() + "'" +
             "}";
     }
     
