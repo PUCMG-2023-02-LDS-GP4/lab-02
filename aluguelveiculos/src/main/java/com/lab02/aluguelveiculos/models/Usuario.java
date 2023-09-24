@@ -4,7 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Column;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "usuarios")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario {
     
     @Id
@@ -40,7 +41,6 @@ public class Usuario {
         this.username = username;
         this.email = email;
         this.senha = senha;
-        this.pedidosCliente = pedidosCliente; 
     }
 
     public int getId() {
@@ -75,13 +75,6 @@ public class Usuario {
         this.senha = senha;
     }
 
-     public List<Pedido> getPedidosCliente() {
-        return this.pedidosCliente;
-    }
-
-    public void setPedidosCliente(List<Pedido> pedidosCliente) {
-        this.pedidosCliente = pedidosCliente;
-    } 
 
     @Override
     public boolean equals(Object o) {
@@ -91,7 +84,7 @@ public class Usuario {
             return false;
         }
         Usuario usuario = (Usuario) o;
-        return id == usuario.id && Objects.equals(username, usuario.username) && Objects.equals(email, usuario.email) && Objects.equals(telefone, usuario.telefone) && Objects.equals(endereco, usuario.endereco) && Objects.equals(senha, usuario.senha);
+        return id == usuario.id && Objects.equals(username, usuario.username) && Objects.equals(email, usuario.email) && Objects.equals(senha, usuario.senha);
     }
 
     @Override
@@ -109,19 +102,4 @@ public class Usuario {
             "}";
     }
 
-    public void cadastrarUsuario(String username, String email, String senha) {
-
-    }
-/* 
-    public String consultarPedido(int idPedido) {
-
-    }
-
-    public String modificarPedido(int idPedido) {
-
-    } */
-
-    public void cancelarPedido(int idPedido) {
-
-    }
 }

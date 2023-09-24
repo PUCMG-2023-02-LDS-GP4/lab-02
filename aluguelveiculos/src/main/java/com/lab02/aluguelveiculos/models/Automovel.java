@@ -32,15 +32,19 @@ public class Automovel {
     @Column(nullable = false)
     private String placa;
 
+    @Column(nullable = false)
+    private Boolean disponivel;
+
 
     public Automovel() {
     }
 
-    public Automovel(int ano, String marca, String modelo, String placa) {
+    public Automovel(int ano, String marca, String modelo, String placa, Boolean disponivel) {
         this.ano = ano;
         this.marca = marca;
         this.modelo = modelo;
         this.placa = placa;
+        this.disponivel = disponivel;
     }
 
     public int getMatricula() {
@@ -83,6 +87,18 @@ public class Automovel {
         this.placa = placa;
     }
 
+    public Boolean isDisponivel() {
+        return this.disponivel;
+    }
+
+    public Boolean getDisponivel() {
+        return this.disponivel;
+    }
+
+    public void setDisponivel(Boolean disponivel) {
+        this.disponivel = disponivel;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -109,6 +125,5 @@ public class Automovel {
             ", placa='" + getPlaca() + "'" +
             "}";
     }
-
 
 }

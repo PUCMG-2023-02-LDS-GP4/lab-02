@@ -1,10 +1,15 @@
 package com.lab02.aluguelveiculos.models;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Column;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
@@ -13,14 +18,17 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "agentes")
-public class Agente {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idAgente;
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Agente extends Usuario {
 
+    public enum TipoAgente {
+        EMPRESA,
+        BANCO
+    }
+
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String tipoAgente;
+    private TipoAgente tipoAgente;
 
     @Column(nullable = false)
     private String statusAgente;
@@ -29,25 +37,17 @@ public class Agente {
     public Agente() {
     }
 
-    public Agente(int idAgente, String tipoAgente, String statusAgente) {
-        this.idAgente = idAgente;
+    public Agente(TipoAgente tipoAgente, String statusAgente) {
+
         this.tipoAgente = tipoAgente;
         this.statusAgente = statusAgente;
     }
 
-    public int getIdAgente() {
-        return this.idAgente;
-    }
-
-    public void setIdAgente(int idAgente) {
-        this.idAgente = idAgente;
-    }
-
-    public String getTipoAgente() {
+    public TipoAgente getTipoAgente() {
         return this.tipoAgente;
     }
 
-    public void setTipoAgente(String tipoAgente) {
+    public void setTipoAgente(TipoAgente tipoAgente) {
         this.tipoAgente = tipoAgente;
     }
 
@@ -67,18 +67,17 @@ public class Agente {
             return false;
         }
         Agente agente = (Agente) o;
-        return idAgente == agente.idAgente && Objects.equals(tipoAgente, agente.tipoAgente) && Objects.equals(statusAgente, agente.statusAgente);
+        return Objects.equals(tipoAgente, agente.tipoAgente) && Objects.equals(statusAgente, agente.statusAgente);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idAgente, tipoAgente, statusAgente);
+        return Objects.hash(tipoAgente, statusAgente);
     }
 
     @Override
     public String toString() {
         return "{" +
-            " idAgente='" + getIdAgente() + "'" +
             ", tipoAgente='" + getTipoAgente() + "'" +
             ", statusAgente='" + getStatusAgente() + "'" +
             "}";
@@ -90,5 +89,13 @@ public class Agente {
 
     public void executarContrato(int idPedido) {
 
+    }
+
+    public void avaliarCredito() {
+        if(this.tipoAgente == TipoAgente.BANCO) {
+            // Implementar a avaliação de crédito aqui.
+        } else {
+            throw new UnsupportedOperationException("Avaliação de crédito só pode ser feita por um agente bancário.");
+        }
     }
 }

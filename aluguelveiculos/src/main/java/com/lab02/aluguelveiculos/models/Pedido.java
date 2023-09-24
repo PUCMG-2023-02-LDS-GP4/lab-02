@@ -4,41 +4,39 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Column;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+
 
 @Entity
 @Table(name = "pedidos")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Pedido {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPedido;
 
-    @Column(nullable = false)
-    private String modelo;
-
-    @Column(nullable = false)
-    private String placa;
+    @ManyToOne
+    @JoinColumn(name = "automovel_matricula")
+    private Automovel automovel;
 
     @Column(nullable = false)
     private Date data;
 
     @Column(nullable = false)
-    private String cor;
+    private Boolean pendente;
 
-
-    public Pedido(int idPedido, String modelo, String placa, Date data, String cor) {
-        this.idPedido = idPedido;
-        this.modelo = modelo;
-        this.placa = placa;
+    public Pedido(Date data, Automovel automovel, Boolean pendente) {
         this.data = data;
-        this.cor = cor;
+        this.automovel = automovel;
+        this.pendente = pendente;
     }
 
     public Pedido() {
@@ -52,20 +50,12 @@ public class Pedido {
         this.idPedido = idPedido;
     }
 
-    public String getModelo() {
-        return this.modelo;
+    public Automovel getAutomovel() {
+        return this.automovel;
     }
 
-    public void setModelo(String modelo) {
-        this.modelo = modelo.toUpperCase();
-    }
-
-    public String getPlaca() {
-        return this.placa;
-    }
-
-    public void setPlaca(String placa) {
-        this.placa = placa.toUpperCase();
+    public void setAutomovel(Automovel automovel) {
+        this.automovel = automovel;
     }
 
     public Date getData() {
@@ -76,12 +66,16 @@ public class Pedido {
         this.data = data;
     }
 
-    public String getCor() {
-        return this.cor;
+    public Boolean isPendente() {
+        return this.pendente;
     }
 
-    public void setCor(String cor) {
-        this.cor = cor.toUpperCase();
+    public Boolean getPendente() {
+        return this.pendente;
+    }
+
+    public void setPendente(Boolean pendente) {
+        this.pendente = pendente;
     }
 
 }

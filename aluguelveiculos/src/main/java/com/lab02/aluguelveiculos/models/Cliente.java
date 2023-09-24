@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Column;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
@@ -13,19 +16,21 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "clientes")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Cliente extends Usuario{
     
     @Id
+    @Column(name = "id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column
-    private String RG;
+    private String rg;
 
-    @Column(nullable = false)
-    private int CPF;
+    @Column
+    private String cpf;
 
-    @Column(nullable = false)
+    @Column
     private String nome;
 
     @Column
@@ -37,25 +42,26 @@ public class Cliente extends Usuario{
     @Column
     private String empresaEmpregadora;
 
-/*     @OneToMany // Supondo que cada rendimento é uma entidade separada.
-    private List<Float> rendimentos = new ArrayList<>(); */
+    private float[] rendimentos = new float[3]; 
 
+    @OneToMany 
+    private List<Pedido> pedidosCliente = new ArrayList<>();
 
     public Cliente() {
     }
 
-    public Cliente(int id, String RG, int CPF, String nome, String endereco, String profissao, String empresaEmpregadora) {
+    public Cliente(int id, String rg, String cpf, String nome, String endereco, String profissao, String empresaEmpregadora, float[] rendimentos, List<Pedido> pedidosCliente) {
         this.id = id;
-        this.RG = RG;
-        this.CPF = CPF;
+        this.rg = rg;
+        this.cpf = cpf;
         this.nome = nome;
         this.endereco = endereco;
         this.profissao = profissao;
         this.empresaEmpregadora = empresaEmpregadora;
-/*         this.rendimentos = rendimentos; */
+        this.rendimentos = rendimentos; 
+        this.pedidosCliente = pedidosCliente;
     }
 
-    @Override
     public int getId() {
         return this.id;
     }
@@ -66,19 +72,19 @@ public class Cliente extends Usuario{
     }
 
     public String getRG() {
-        return this.RG;
+        return this.rg;
     }
 
-    public void setRG(String RG) {
-        this.RG = RG;
+    public void setRG(String rg) {
+        this.rg = rg;
     }
 
-    public int getCPF() {
-        return this.CPF;
+    public String getCPF() {
+        return this.cpf;
     }
 
-    public void setCPF(int CPF) {
-        this.CPF = CPF;
+    public void setCPF(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getNome() {
@@ -113,15 +119,26 @@ public class Cliente extends Usuario{
         this.empresaEmpregadora = empresaEmpregadora;
     }
 
-/*     public List<Float> getRendimentos() {
+    public float[] getRendimentos() {
         return this.rendimentos;
     }
 
-    public void setRendimentos(List<Float> rendimentos) {
-        this.rendimentos = rendimentos;
+    public void setRendimentos(float[] rendimentos) {
+        if (rendimentos.length <= 3) {
+            this.rendimentos = rendimentos;
+        } else {
+            throw new IllegalArgumentException("O número de rendimentos não pode ser maior que 3");
+        }
     }
 
- */
+    public List<Pedido> getPedidosCliente() {
+        return this.pedidosCliente;
+    }
+
+    public void setPedidosCliente(List<Pedido> pedidosCliente) {
+        this.pedidosCliente = pedidosCliente;
+    } 
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -130,12 +147,12 @@ public class Cliente extends Usuario{
             return false;
         }
         Cliente cliente = (Cliente) o;
-        return Objects.equals(id, cliente.id) && CPF == cliente.CPF && Objects.equals(nome, cliente.nome) && Objects.equals(endereco, cliente.endereco) && Objects.equals(profissao, cliente.profissao) && Objects.equals(empresaEmpregadora, cliente.empresaEmpregadora);
+        return Objects.equals(id, cliente.id) && cpf == cliente.cpf && Objects.equals(nome, cliente.nome) && Objects.equals(endereco, cliente.endereco) && Objects.equals(profissao, cliente.profissao) && Objects.equals(empresaEmpregadora, cliente.empresaEmpregadora);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, CPF, nome, endereco, profissao, empresaEmpregadora);
+        return Objects.hash(id, cpf, nome, endereco, profissao, empresaEmpregadora);
     }
 
     @Override
