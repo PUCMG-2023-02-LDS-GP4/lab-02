@@ -16,6 +16,8 @@ import java.util.Objects;
 public class Automovel {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "matricula", unique = true)
     private int matricula;
 
     @Column(nullable = false)
@@ -34,8 +36,7 @@ public class Automovel {
     public Automovel() {
     }
 
-    public Automovel(int matricula, int ano, String marca, String modelo, String placa) {
-        this.matricula = matricula;
+    public Automovel(int ano, String marca, String modelo, String placa) {
         this.ano = ano;
         this.marca = marca;
         this.modelo = modelo;

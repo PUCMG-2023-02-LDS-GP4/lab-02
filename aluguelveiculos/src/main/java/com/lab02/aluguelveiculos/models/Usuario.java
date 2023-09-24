@@ -17,6 +17,7 @@ public class Usuario {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true)
     private int id;
 
     @Column(nullable = false, unique = true)
@@ -25,30 +26,21 @@ public class Usuario {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column
-    private String telefone;
-
-    @Column
-    private String endereco;
-
     @Column(nullable = false)
     private String senha;
 
-/*     @OneToMany 
-    private List<Pedidos> pedidosCliente = new ArrayList<>(); */
+     @OneToMany 
+    private List<Pedido> pedidosCliente = new ArrayList<>(); 
 
 
     public Usuario() {
     }
 
-    public Usuario(int id, String username, String email, String telefone, String endereco, String senha) {
-        this.id = id;
+    public Usuario(String username, String email, String senha) {
         this.username = username;
         this.email = email;
-        this.telefone = telefone;
-        this.endereco = endereco;
         this.senha = senha;
-/*         this.pedidosCliente = pedidosCliente; */
+        this.pedidosCliente = pedidosCliente; 
     }
 
     public int getId() {
@@ -75,22 +67,6 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getTelefone() {
-        return this.telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getEndereco() {
-        return this.endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
     public String getSenha() {
         return this.senha;
     }
@@ -99,13 +75,13 @@ public class Usuario {
         this.senha = senha;
     }
 
-/*     public List<Pedidos> getPedidosCliente() {
+     public List<Pedido> getPedidosCliente() {
         return this.pedidosCliente;
     }
 
-    public void setPedidosCliente(List<Pedidos> pedidosCliente) {
+    public void setPedidosCliente(List<Pedido> pedidosCliente) {
         this.pedidosCliente = pedidosCliente;
-    } */
+    } 
 
     @Override
     public boolean equals(Object o) {
@@ -120,7 +96,7 @@ public class Usuario {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, email, telefone, endereco, senha);
+        return Objects.hash(id, username, email, senha);
     }
 
     @Override
@@ -129,13 +105,11 @@ public class Usuario {
             " id='" + getId() + "'" +
             ", username='" + getUsername() + "'" +
             ", email='" + getEmail() + "'" +
-            ", telefone='" + getTelefone() + "'" +
-            ", endereco='" + getEndereco() + "'" +
             ", senha='" + getSenha() + "'" +
             "}";
     }
 
-    public void cadastrarUsuario(String username, String email, String telefone, String senha) {
+    public void cadastrarUsuario(String username, String email, String senha) {
 
     }
 /* 
