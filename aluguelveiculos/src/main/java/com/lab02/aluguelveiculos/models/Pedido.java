@@ -11,14 +11,18 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Column;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Entity
 @Table(name = "pedidos")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Pedido {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPedido;
@@ -78,4 +82,10 @@ public class Pedido {
         this.pendente = pendente;
     }
 
+    public List<Pedido> listarPedidosPendentes() {
+        List<Pedido> listaPedidos = new ArrayList<Pedido>();
+        return listaPedidos.stream()
+            .filter(pedido -> pedido.isPendente())
+            .collect(Collectors.toList());
+    }
 }

@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "automoveis")
@@ -124,6 +125,13 @@ public class Automovel {
             ", modelo='" + getModelo() + "'" +
             ", placa='" + getPlaca() + "'" +
             "}";
+    }
+
+    public List<Automovel> listarCarrosDisponiveis() {
+        List<Automovel> listaAutomoveis = new ArrayList<Automovel>();
+        return listaAutomoveis.stream()
+            .filter(automovel -> !automovel.isDisponivel()) // Assumindo que a classe Automovel tem um método isAlugado.
+            .collect(Collectors.toList());
     }
 
 }

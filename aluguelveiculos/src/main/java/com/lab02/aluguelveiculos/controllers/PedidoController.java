@@ -4,7 +4,11 @@ import com.lab02.aluguelveiculos.models.Automovel;
 import com.lab02.aluguelveiculos.models.Pedido;
 import com.lab02.aluguelveiculos.repositories.AutomovelRepository;
 import com.lab02.aluguelveiculos.repositories.PedidoRepository;
+import com.lab02.aluguelveiculos.services.PedidoService;
+
 import java.util.Optional;
+
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +24,13 @@ public class PedidoController {
 
     @Autowired
     private AutomovelRepository automovelRepository;
+
+    private final PedidoService pedidoService;
+
+    @Autowired
+    public PedidoController(PedidoService pedidoService) {
+        this.pedidoService = pedidoService;
+    }
 
     @PostMapping
     public ResponseEntity<Pedido> createPedido(@RequestBody Pedido pedido) {
@@ -46,4 +57,22 @@ public class PedidoController {
         Pedido pedido = pedidoRepository.getReferenceById(id);
         return new ResponseEntity<>(pedido, HttpStatus.OK);
     }
+
+    @GetMapping("/pendentes")
+    public ResponseEntity<List<Pedido>> listarPedidosPendentes() {
+        return ResponseEntity.ok(pedidoService.listarPedidosPendentes());
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Pedido> updatePedido(@PathVariable int id, @RequestBody Pedido pedidoAtualizado) {
+    try {
+        Pedido pedido = pedidoService.atualizarPedido(id, pedidoAtualizado);
+        return new ResponseEntity<>(pedido, HttpStatus.OK);
+    } catch (RuntimeException ex) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+}
+
+
+    
 }

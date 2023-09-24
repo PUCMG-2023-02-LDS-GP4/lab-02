@@ -1,10 +1,13 @@
 package com.lab02.aluguelveiculos.controllers;
 
 import com.lab02.aluguelveiculos.models.Automovel;
+import com.lab02.aluguelveiculos.models.Pedido;
 import com.lab02.aluguelveiculos.repositories.AutomovelRepository;
 import com.lab02.aluguelveiculos.services.AutomovelService;
+import com.lab02.aluguelveiculos.services.PedidoService;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -17,8 +20,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/automoveis")
 public class AutomovelController {
 
+    private final AutomovelService automovelService;
+
     @Autowired
-    private AutomovelService automovelService;
+    public AutomovelController(AutomovelService automovelService) {
+        this.automovelService = automovelService;
+    }
 
     @Autowired
     private AutomovelRepository automovelRepository;
@@ -35,19 +42,8 @@ public class AutomovelController {
         return new ResponseEntity<>(automovel, HttpStatus.OK);
     }
 
-        @GetMapping("/detalhes/{id}")
-    public ResponseEntity<Map<String, Object>> getDetalhes(@PathVariable int id) {
-        Optional<Automovel> automovelOpt = automovelRepository.findById(id);
-
-        if (!automovelOpt.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        Automovel automovel = automovelOpt.get();
-        Map<String, Object> response = new HashMap<>();
-        response.put("placa", automovel.getPlaca());
-        response.put("modelo", automovel.getModelo());
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    @GetMapping("/disponiveis")
+    public ResponseEntity<List<Automovel>> listarCarrosDisponiveis() {
+        return ResponseEntity.ok(automovelService.listarCarrosDisponiveis());
     }
 }
