@@ -26,13 +26,13 @@ public class Contrato {
     private int id;
 
     @ManyToOne
-    private Cliente contratante;
+    private Cliente cliente;
 
     @ManyToOne
     private Automovel automovel;
 
     @ManyToOne
-    private Agente avaliador;
+    private Agente agente;
 
     @Column
     private Date dataInicio;
@@ -49,10 +49,10 @@ public class Contrato {
     public Contrato() {
     }
 
-    public Contrato(Cliente contratante, Automovel automovel, Agente avaliador, Date dataInicio, Boolean aprovado, TipoContrato tipoContrato, int proprietarioId) {
-        this.contratante = contratante;
+    public Contrato(Cliente cliente, Automovel automovel, Agente agente, Date dataInicio, Boolean aprovado, TipoContrato tipoContrato, int proprietarioId) {
+        this.cliente = cliente;
         this.automovel = automovel;
-        this.avaliador = avaliador;
+        this.agente = agente;
         this.dataInicio = dataInicio;
         this.aprovado = false;
         this.tipoContrato = tipoContrato;
@@ -75,12 +75,12 @@ public class Contrato {
         this.automovel = automovel;
     }
 
-    public Agente getAvaliador() {
-        return this.avaliador;
+    public Agente getAgente() {
+        return this.agente;
     }
 
-    public void setAvaliador(Agente avaliador) {
-        this.avaliador = avaliador;
+    public void setAgente(Agente agente) {
+        this.agente = agente;
     }
 
     public Date getDataInicio() {
@@ -119,12 +119,12 @@ public class Contrato {
         this.proprietarioId = proprietarioId;
     }
 
-    public Cliente getContratante() {
-        return this.contratante;
+    public Cliente getCliente() {
+        return this.cliente;
     }
 
-    public void setContratante(Cliente contratante) {
-        this.contratante = contratante;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     

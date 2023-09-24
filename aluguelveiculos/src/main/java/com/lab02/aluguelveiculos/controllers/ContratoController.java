@@ -50,18 +50,18 @@ public class ContratoController {
 
 
 
-        Optional<Cliente> clienteOpt = clienteRepository.findById(contrato.getContratante().getId());
+        Optional<Cliente> clienteOpt = clienteRepository.findById(contrato.getCliente().getId());
 
 
 
-        Optional<Agente> agenteOpt = agenteRepository.findById(contrato.getAvaliador().getId());
+        Optional<Agente> agenteOpt = agenteRepository.findById(contrato.getAgente().getId());
 
 
 
         Agente agente = agenteOpt.get();
-        contrato.setAvaliador(agente);
+        contrato.setAgente(agente);
         Cliente cliente = clienteOpt.get();
-        contrato.setContratante(cliente);
+        contrato.setCliente(cliente);
         Automovel automovel = automovelOpt.get();
         contrato.setAutomovel(automovel);
         

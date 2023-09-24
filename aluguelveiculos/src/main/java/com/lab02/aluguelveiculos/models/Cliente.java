@@ -18,11 +18,6 @@ import java.util.Objects;
 @Table(name = "clientes")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Cliente extends Usuario{
-    
-    @Id
-    @Column(name = "id", unique = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
 
     @Column
     private String rg;
@@ -50,8 +45,7 @@ public class Cliente extends Usuario{
     public Cliente() {
     }
 
-    public Cliente(int id, String rg, String cpf, String nome, String endereco, String profissao, String empresaEmpregadora, float[] rendimentos, List<Pedido> pedidosCliente) {
-        this.id = id;
+    public Cliente(String rg, String cpf, String nome, String endereco, String profissao, String empresaEmpregadora, float[] rendimentos, List<Pedido> pedidosCliente) {
         this.rg = rg;
         this.cpf = cpf;
         this.nome = nome;
@@ -62,14 +56,6 @@ public class Cliente extends Usuario{
         this.pedidosCliente = pedidosCliente;
     }
 
-    public int getId() {
-        return this.id;
-    }
-
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getRG() {
         return this.rg;
@@ -139,26 +125,15 @@ public class Cliente extends Usuario{
         this.pedidosCliente = pedidosCliente;
     } 
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Cliente)) {
-            return false;
-        }
-        Cliente cliente = (Cliente) o;
-        return Objects.equals(id, cliente.id) && cpf == cliente.cpf && Objects.equals(nome, cliente.nome) && Objects.equals(endereco, cliente.endereco) && Objects.equals(profissao, cliente.profissao) && Objects.equals(empresaEmpregadora, cliente.empresaEmpregadora);
-    }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, cpf, nome, endereco, profissao, empresaEmpregadora);
+        return Objects.hash(cpf, nome, endereco, profissao, empresaEmpregadora);
     }
 
     @Override
     public String toString() {
         return "{" +
-            " id='" + getId() + "'" +
             ", CPF='" + getCPF() + "'" +
             ", nome='" + getNome() + "'" +
             ", endereco='" + getEndereco() + "'" +
