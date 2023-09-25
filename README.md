@@ -1,4 +1,4 @@
-# Projeto 3 - Sistema de Moeda Estudantil
+# Projeto 2 - Aluguel de veículos	 
   
 ## Alunos integrantes da equipe
 
