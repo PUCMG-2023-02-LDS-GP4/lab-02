@@ -1,4 +1,4 @@
-# Projeto 2 - Sistema de Moeda Estudantil
+# Projeto 3 - Sistema de Moeda Estudantil
   
 ## Alunos integrantes da equipe
 
